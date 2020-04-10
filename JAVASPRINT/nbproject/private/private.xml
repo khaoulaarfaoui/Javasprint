@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/home/khaoula/NetBeansProjects/JAVASPRINT/src/GUI/Admin/Admin_gui.fxml</file>
+            <file>file:/home/khaoula/NetBeansProjects/JAVASPRINT/src/GUIMAIN/main.java</file>
+            <file>file:/home/khaoula/NetBeansProjects/JAVASPRINT/src/Services/FosUerService.java</file>
+            <file>file:/home/khaoula/NetBeansProjects/JAVASPRINT/src/GUI/Admin/Admin_guiController.java</file>
+            <file>file:/home/khaoula/NetBeansProjects/JAVASPRINT/src/Security/Authenticator.java</file>
+            <file>file:/home/khaoula/NetBeansProjects/JAVASPRINT/src/Security/Sha512.java</file>
+            <file>file:/home/khaoula/NetBeansProjects/JAVASPRINT/src/Security/FOSJCrypt.java</file>
+        </group>
+    </open-files>
+</project-private>
