@@ -13,16 +13,18 @@ import java.sql.Date;
 
 public class Employee {
     private int id, user_id, admin_id;
-    private String fonction, Name, Last_name,image;
+    private String fonction, Name, Last_name,image, email;
     private Date Birth_Date;
 
-    public Employee(int id, String fonction, String Name, String Last_name, String image, Date Birth_Date) {
+    public Employee(int id, String fonction, String Name, String Last_name, String image, Date Birth_Date, String email) {
         this.id = id;
         this.fonction = fonction;
         this.Name = Name;
         this.Last_name = Last_name;
         this.image = image;
+       
         this.Birth_Date = Birth_Date;
+         this.email=email;
     }
 
     public Employee(int id, String Name) {
@@ -109,6 +111,20 @@ public class Employee {
     public void setBirth_Date(Date Birth_Date) {
         this.Birth_Date = Birth_Date;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" + "id=" + id + ", user_id=" + user_id + ", admin_id=" + admin_id + ", fonction=" + fonction + ", Name=" + Name + ", Last_name=" + Last_name + ", image=" + image + ", email=" + email + ", Birth_Date=" + Birth_Date + '}';
+    }
+
 	
     
 }

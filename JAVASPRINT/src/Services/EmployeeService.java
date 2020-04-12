@@ -48,7 +48,7 @@ public class EmployeeService {
         }
     }
     public void ajouter(Employee user) {
-        String req = "INSERT INTO employee (fonction, Name, Last_name, Birth_Date,image) VALUES (?, ?, ?, ?, ?)" ;
+        String req = "INSERT INTO employee (fonction, Name, Last_name, Birth_Date, image, email) VALUES (?, ?, ?, ?, ?, ?)" ;
         PreparedStatement pre;
         
         try {
@@ -58,6 +58,7 @@ public class EmployeeService {
             pre.setString(3, user.getLast_name());
             pre.setDate(4, user.getBirth_Date());
             pre.setString(5, user.getImage());
+             pre.setString(6, user.getEmail());
             pre.executeUpdate();
             System.out.println("Employee ajouter avec succés");
         } catch (SQLException ex) {
@@ -88,40 +89,30 @@ public class EmployeeService {
         try {
             ste=connection.createStatement();
             rs=ste.executeQuery("SELECT * from employee where id="+id);
-             while (rs.next()) {
-            System.out.println("Name : "
-            + rs.getString("first_name")
-            + ", prenom : "
-            + rs.getString("Last_name"));          
-            }
         } catch (SQLException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
         }
         return user;
     }  
-        public void modifier(int id, FosUser user) {
-        String requete="UPDATE employee set "
-                + "fonction=?,Name=?,Last_name=?,Birth_Date=?,image=?"
-               + "where id=?";
-        PreparedStatement pre=null;
-        try {
-            System.out.println(user);
-            pre = connection.prepareStatement(requete);
-            pre.setString(1, user.getUsername());
-            pre.setString(2, user.getUsernameCanonical());
-            pre.setString(3, user.getEmail());
-            pre.setString(4, user.getEmailCanonical());
-            pre.setBoolean(5, user.getEnabled());
-            pre.setString(6, user.getSalt());
-            pre.setString(7, user.getPassword());
-       
-            if(id==user.getId())
-            pre.setInt(8, id);
-            else System.out.println("be carfull error id ");
-            pre.executeUpdate();
-            System.out.println("Employee Modifier avec succés");
-        } catch (SQLException ex) {
+        public void editUser(Employee u, int id) throws SQLException {
+              try{
+            String query = "update `employee` set fonction =?,Name = ? , Last_name =? , Birth_Date =? , image =?, email=?  where id =?  ;";
+            PreparedStatement st = connection.prepareStatement(query);
+            st.setString(1, u.getFonction());
+            st.setString(2, u.getName());
+            st.setString(3, u.getLast_name());
+            st.setDate(4, u.getBirth_Date());
+            st.setString(5, u.getImage());
+            st.setString(6, u.getEmail());
+            st.setInt(7, u.getId());
+
+            st.execute();
+            System.out.println("Changes saved successfully !");
+
+        }
+    catch (SQLException ex) {
             Logger.getLogger(EmployeeService.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 }

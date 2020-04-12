@@ -32,7 +32,7 @@ public class JAVASPRINT  extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("Admin_gui.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("DELETE_EMP.fxml"));
         Scene scene = new Scene(root);
  
         stage.setScene(scene);
