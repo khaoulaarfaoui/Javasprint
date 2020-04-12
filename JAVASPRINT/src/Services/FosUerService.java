@@ -6,12 +6,17 @@
 package Services;
 
 import Entities.FosUser;
+import Security.FOSJCrypt;
+import Util.SerializedPhpParser;
 import Utils.ConnexionBD;
 import java.sql.Connection;
+import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import java.util.logging.Level;
@@ -37,17 +42,13 @@ public class FosUerService {
         }
     }
         
-//1ere methode supprimer 
-//ON DELETE CASCADE
-//ON UPDATE CASCADE;
-    
+
    public void supprimer(int id) {
         String SQL = "DELETE FROM fos_user WHERE id = ?";
         PreparedStatement pre = null;
         try {
-            // get a connection and then in your try catch for executing your delete...
             pre = connection.prepareStatement(SQL);
-            pre.setInt(1, id);
+            pre.setString(1,String.valueOf(id));
             pre.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
@@ -55,30 +56,40 @@ public class FosUerService {
     }
   //2eme methode Ajout 
     public void ajouter(FosUser user) {
-        String req = "INSERT INTO fos_user (username, username_canonical, email, email_canonical, enabled, salt, password, roles,last_name,first_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)" ;
+        String req = "INSERT INTO fos_user (username, username_canonical, email, email_canonical, enabled, salt, password, last_login, roles,last_name,first_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)" ;
         PreparedStatement pre;
+        String pwd= FOSJCrypt.generateHash(user.getPassword());
+        String usernameCanoical =user.getUsername().toLowerCase();
+        String EmailCanonical =user.getEmail().toLowerCase();
+     
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = new Date();
         
         try {
             pre = connection.prepareStatement(req);
             pre.setString(1, user.getUsername());
-            pre.setString(2, user.getUsernameCanonical());
+            pre.setString(2, usernameCanoical);
             pre.setString(3, user.getEmail());
-            pre.setString(4, user.getEmailCanonical());
-            pre.setBoolean(5, user.getEnabled());
+            pre.setString(4, EmailCanonical );
+            pre.setShort(5,(short)1);
             pre.setString(6, user.getSalt());
-            pre.setString(7, user.getPassword());
-
-         
+            pre.setString(7, pwd);
+            pre.setString(8,dateFormat.format(date));
+  
             if(user.getRoles().equals("ROLE_CLIENT"))
-                pre.setString(8,"a:1:{i:0;s:11:\"ROLE_CLIENT\";}");
+                pre.setString(9,"a:1:{i:0;s:11:\"ROLE_CLIENT\";}");
+            else 
+             if(user.getRoles().equals("ROLE_ADMIN"))
+                pre.setString(9,"a:1:{i:0;s:5:\"ROLE_ADMIN\";}");
             else
             if(user.getRoles().equals("ROLE_Employee"))
-                pre.setString(8,"a:1:{i:0;s:18:\"ROLE_EmployeeT\";}");
-                pre.setString(9, user.getFirstName());
-                pre.setString(10, user.getLastName());
+                pre.setString(9,"a:1:{i:0;s:13:\"ROLE_EmployeeT\";}");
+                pre.setString(10, user.getFirstName());
+                pre.setString(11, user.getLastName());  
             pre.executeUpdate();
             System.out.println("Utilisateur ajouter avec succés");
-        } catch (SQLException ex) {
+        } 
+        catch (SQLException ex) {
             Logger.getLogger(FosUerService.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -90,7 +101,7 @@ public class FosUerService {
             rs = ste.executeQuery("SELECT * FROM fos_user");
             users = new ArrayList<>();
             while (rs.next()){
-                users.add(new FosUser(rs.getInt(1),rs.getString(2)));
+             users.add(new FosUser(rs.getInt(1),rs.getString(2)));
                         //rs.getString(3),rs.getString(4),rs.getString(5),rs.getBoolean(6),rs.getString(7),rs.getString(8),rs.getString(9),rs.getShort(10),rs.getString(11),rs.getString(12),rs.getDate(13),rs.getString(14),rs.getDate(15),serializePHPtoJava(rs.getString(16)),rs.getString(17)));
             }
         } catch (SQLException ex) {
@@ -146,7 +157,7 @@ public class FosUerService {
             pre.setString(2, user.getUsernameCanonical());
             pre.setString(3, user.getEmail());
             pre.setString(4, user.getEmailCanonical());
-            pre.setBoolean(5, user.getEnabled());
+            pre.setShort(5, user.getEnabled());
             pre.setString(6, user.getSalt());
             pre.setString(7, user.getPassword());
             if(user.getRoles().equals("ROLE_CLIENT"))
@@ -165,19 +176,41 @@ public class FosUerService {
             Logger.getLogger(FosUerService.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+     public String serializePHPtoJava(String role_role){
+        String strResultat ="";
+        if (role_role!=null) {
+            SerializedPhpParser serializedPhpParser = new SerializedPhpParser(role_role);
+            Object result = serializedPhpParser.parse();
+             strResultat = result.toString();
+            strResultat= strResultat.substring(3,strResultat.length()-1);
+        }
+        return strResultat;
+    }
+     
         public ArrayList<FosUser> selectAllEnabled() {
-        ArrayList<FosUser> users = new ArrayList<>();
+         ArrayList<FosUser> users = new ArrayList<>();
         ResultSet rs;
         try {
-            rs = ste.executeQuery("SELECT * FROM fos_user where enabled=1");
+            rs = ste.executeQuery("SELECT * FROM utilisateur where enabled=1");
             users = new ArrayList<>();
             while (rs.next()){
-                users.add(new FosUser(rs.getInt(1),rs.getString(2)));
-                        //rs.getDouble(3),rs.getDouble(4),rs.getInt(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9),rs.getShort(10),rs.getString(11),rs.getString(12),rs.getDate(13),rs.getString(14),rs.getDate(15),serializePHPtoJava(rs.getString(16)),rs.getString(17)));
+users.add(new FosUser(rs.getInt(1),
+        rs.getString(2),
+        rs.getString(3),
+        rs.getString(4),
+        rs.getString(5),
+        rs.getShort(6),
+        rs.getString(7),
+        rs.getString(8),
+        rs.getDate(9),
+        rs.getString(10),
+        rs.getDate(11),
+        serializePHPtoJava(rs.getString(12)),
+        rs.getString(13),rs.getString(14)));
+                //users.add(new FosUser(rs.getInt(1),rs.getInt(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9),rs.getShort(10),rs.getString(11),rs.getString(12),rs.getDate(13),rs.getString(14),rs.getDate(15),serializePHPtoJava(rs.getString(16)),rs.getString(17)));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(FosUser.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FosUerService.class.getName()).log(Level.SEVERE, null, ex);
         }
         return  users;
     }

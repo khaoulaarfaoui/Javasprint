@@ -12,6 +12,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
 /**
  *
  * @author khaoula
@@ -28,7 +29,7 @@ public class Authenticator {
         Authenticator.currentAuth = currentAuth;
     }
 
-    public static boolean validate(String userName, String password) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+    public static boolean validate(String userName, String plainPassword) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         loadAuthentificators();
         FosUser validUserPassword = USERS.get(userName);
         if(validUserPassword==null)
@@ -36,7 +37,7 @@ public class Authenticator {
         else
         currentAuth=validUserPassword;
         //  Cette méthode prend l'utilisateur qui veut s'authentifier et encrypt mot de pass en claire et puis elle vérifie si la hash générer et égale au hash original
-        return  FOSJCrypt.checkPassword(validUserPassword.getPassword(),password,validUserPassword.getSalt());
+        return  FOSJCrypt.checkPassword(plainPassword,validUserPassword.getPassword());
     }
     public static void loadAuthentificators(){
         FosUerService useserv=new FosUerService();
@@ -47,4 +48,5 @@ public class Authenticator {
         }
         System.out.println("Loading authentificators list");
     }
+    
 }

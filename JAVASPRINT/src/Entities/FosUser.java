@@ -31,7 +31,7 @@ public class FosUser  {
     
     private String emailCanonical;
     
-    private boolean enabled;
+    private short enabled;
     
     private String salt;
     
@@ -43,8 +43,9 @@ public class FosUser  {
    
     private String roles;
    
-    private String firstName;
+    
     private String lastName;
+    private String firstName;
    
 
     public FosUser() {
@@ -54,7 +55,7 @@ public class FosUser  {
         this.id = id;
     }
 
-    public FosUser(Integer id, String username, String usernameCanonical, String email, String emailCanonical, boolean enabled, String password, String roles) {
+    public FosUser(Integer id, String username, String usernameCanonical, String email, String emailCanonical, short enabled, String password, String roles) {
         this.id = id;
         this.username = username;
         this.usernameCanonical = usernameCanonical;
@@ -66,7 +67,7 @@ public class FosUser  {
 
     }
 
-    public FosUser(String username, String usernameCanonical, String email, String emailCanonical, boolean enabled, String salt, String password, String roles, String firstName, String lastName) {
+    public FosUser(String username, String usernameCanonical, String email, String emailCanonical, short enabled, String salt, String password, String roles, String firstName, String lastName) {
         this.username = username;
         this.usernameCanonical = usernameCanonical;
         this.email = email;
@@ -82,6 +83,32 @@ public class FosUser  {
     public FosUser(Integer id, String username) {
         this.id = id;
         this.username = username;
+    }
+
+    public FosUser(int id,String username, String usernameCanonical, String email, String emailCanonical, short enabled, String salt, String password, Date lastLogin, String confirmationToken, Date passwordRequestedAt,String roles, String firstName, String lastName) {
+         this.id = id;
+        this.username = username;
+        this.usernameCanonical = usernameCanonical;
+        this.email = email;
+        this.emailCanonical = emailCanonical;
+        this.enabled = enabled;
+        this.salt = salt;
+        this.password = password;
+        this.lastLogin = lastLogin;
+        this.confirmationToken = confirmationToken;
+        this.passwordRequestedAt = passwordRequestedAt;
+        this.roles = roles;
+        this.lastName=lastName;
+        this.firstName=firstName;
+    }
+
+    public FosUser(String username, String email, String password, String roles, String lastName, String firstName) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.roles = roles;
+        this.lastName = lastName;
+        this.firstName = firstName;
     }
     
 
@@ -125,11 +152,11 @@ public class FosUser  {
         this.emailCanonical = emailCanonical;
     }
 
-    public boolean getEnabled() {
+    public short getEnabled() {
         return enabled;
     }
 
-    public void setEnabled(boolean enabled) {
+    public void setEnabled(short enabled) {
         this.enabled = enabled;
     }
 
@@ -150,6 +177,7 @@ public class FosUser  {
     }
 
     public Date getLastLogin() {
+
         return lastLogin;
     }
 
@@ -210,7 +238,7 @@ public class FosUser  {
             user.setId(rs.getInt("id"));
             user.setUsername(rs.getString("username"));
             user.setEmail(rs.getString("email"));
-            user.setEnabled(rs.getBoolean("enabled"));
+            user.setEnabled(rs.getShort("enabled"));
             user.setSalt(rs.getString("salt"));
             user.setPassword(rs.getString("password"));
             user.setLastLogin(rs.getDate("last_login"));

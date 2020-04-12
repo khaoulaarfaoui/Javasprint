@@ -7,33 +7,55 @@ package javasprint;
 
 import Entities.Employee;
 import Entities.FosUser;
+import Security.FOSJCrypt;
 import Services.FosUerService;
 import Utils.ConnexionBD;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
+import javafx.application.Application;
+import static javafx.application.Application.launch;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 /**
  *
  * @author khaoula
  */
-public class JAVASPRINT {
+public class JAVASPRINT  extends Application {
 
     /**
      * @param args the command line arguments
      */
+    
+    @Override
+    public void start(Stage stage) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("Admin_gui.fxml"));
+        Scene scene = new Scene(root);
+ 
+        stage.setScene(scene);
+        stage.show();
+    }
+    
     public static void main(String[] args) {
-        FosUerService e=new FosUerService();
-        ConnexionBD.getInstance();
-        FosUser f= new FosUser("khooooo","hama","aa@aa.tn","aa@aa.tn",true,"NULL","aaa","ROLE_CLIENT","hma","hma"); 
-
-        e.modifier(17,f);
+            //throws NoSuchAlgorithmException, UnsupportedEncodingException {
+       // boolean test =FOSJCrypt.checkPassword("123","$2y$12$f8lPIEQ5bKqWBXPqbfKyGebVsN9flIh4eC8CBMFTkuMGf WrB0C7ua");
+        //System.out.println("test is "+ test);
+    launch(args);   
+    //  FosUerService e=new FosUerService();
+     // ConnexionBD.getInstance();
+     // FosUser f= new FosUser("testjava","test@java.tn","1234","ROLE_CLIENT","test","java"); 
+      //e.ajouter(f);
+        //e.modifier(17,f);
        // e.selectOne(10);
         //e.selectAll().forEach(System.out::println);
-       // e.ajouter(f);
-      //   e.supprimer(1);
+        
+       //  e.supprimer(1);
         // TODO code application logic here
       /* 
         ConnexionBD.dbConnexion();
-
          System.out.println("aaaa"); 
        FosUerService.insererUtilisateur(f);
         System.out.println("aaaa"); 

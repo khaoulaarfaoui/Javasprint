@@ -13,6 +13,7 @@
       <Label layoutX="60.0" layoutY="136.0" text="USERNAME" />
       <Label layoutX="59.0" layoutY="220.0" text="PASSWORD" />
       <Label layoutX="165.0" layoutY="60.0" prefHeight="16.0" prefWidth="271.0" text="                            LOGIN" />
-      <Label layoutX="301.0" layoutY="361.0" prefHeight="16.0" prefWidth="271.0" text="                     NEW! YOU CAN REGISTER HERE " />
+      <Label fx:id="errorMessage" layoutX="46.0" layoutY="320.0" prefHeight="16.0" prefWidth="149.0" text="Label" />
+      <Label fx:id="hash" layoutX="447.0" layoutY="343.0" text="hashed pwd" />
    </children>
 </AnchorPane>
