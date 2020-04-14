@@ -47,6 +47,19 @@ public class Employee {
     public Employee() {
     }
 
+    public Employee(int id, String fonction, String Name, String Last_name, Date Birth_Date, String image, String email) {
+        this.id = id;
+        this.fonction = fonction;
+        this.Name = Name;
+        this.Last_name = Last_name;
+        this.Birth_Date = Birth_Date;
+        this.image = image;
+        this.email = email;
+        
+    }
+
+   
+
     
     public int getId() {
         return id;

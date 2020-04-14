@@ -15,6 +15,8 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
  * FXML Controller class
@@ -37,25 +39,33 @@ public class READ_EMPController implements Initializable {
     private TableColumn<?, ?> image;
     @FXML
     private TableColumn<?, ?> birth;
+    @FXML
+    private TableView<Employee> table;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+         setUpEmployee();
+    
     }    
-     public void setUpEmployee(){
+       public void setUpEmployee(){
             EmployeeService EMPS= new  EmployeeService();
-            ArrayList<Employee> mahden = null ;
-            mahden=(ArrayList<Employee>) EMPS.selectAll();
-            obb=FXCollections.observableArrayList(mahden);
-            idRecla.setCellValueFactory(new PropertyValueFactory<> ("id_reclamation"));
-            dateRec.setCellValueFactory(new PropertyValueFactory<> ("date_reclamation"));
-            contenu.setCellValueFactory(new PropertyValueFactory<> ("contenu"));
-            etat.setCellValueFactory(new PropertyValueFactory<> ("etat"));
-            idUser.setCellValueFactory(new PropertyValueFactory<> ("id_user"));
-            reponse.setCellValueFactory(new PropertyValueFactory<> ("reponse"));
-            tablereclamation.setItems(obb);
+            ObservableList<Employee> mahden = FXCollections.observableArrayList();
+            mahden.addAll(EMPS.selectAll());
+             id.setCellValueFactory(new PropertyValueFactory<> ("id"));
+            name.setCellValueFactory(new PropertyValueFactory<> ("Name"));
+            lastname.setCellValueFactory(new PropertyValueFactory<> ("Last_name"));
+            fonction.setCellValueFactory(new PropertyValueFactory<> ("fonction"));
+            email.setCellValueFactory(new PropertyValueFactory<> ("email"));
+            birth.setCellValueFactory(new PropertyValueFactory<> ("Birth_Date"));
+            image.setCellValueFactory(new PropertyValueFactory<> ("image"));   
+            //approve.setCellFactory(new Callback<TableColumn<Employee, Boolean>, TableCell<Employee, Boolean>>() {
+
+      table.setItems(mahden);
+          
     }
+ 
+    
 
 }

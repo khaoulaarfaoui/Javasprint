@@ -8,6 +8,9 @@ package Services;
 import Entities.Employee;
 import Entities.FosUser;
 import Utils.ConnexionBD;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -47,18 +50,19 @@ public class EmployeeService {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public void ajouter(Employee user) {
+    public void ajouter(Employee user) throws FileNotFoundException {
         String req = "INSERT INTO employee (fonction, Name, Last_name, Birth_Date, image, email) VALUES (?, ?, ?, ?, ?, ?)" ;
         PreparedStatement pre;
-        
+           InputStream is = new FileInputStream(user.getEmail());
+           
         try {
             pre = connection.prepareStatement(req);
             pre.setString(1, user.getFonction());
             pre.setString(2, user.getName());
             pre.setString(3, user.getLast_name());
             pre.setDate(4, user.getBirth_Date());
-            pre.setString(5, user.getImage());
-             pre.setString(6, user.getEmail());
+            pre.setBlob(5, is);
+            pre.setString(6, user.getEmail());
             pre.executeUpdate();
             System.out.println("Employee ajouter avec succés");
         } catch (SQLException ex) {
@@ -70,11 +74,13 @@ public class EmployeeService {
         ArrayList<Employee> users = new ArrayList<>();
         ResultSet rs;
         try {
-            rs = ste.executeQuery("SELECT * FROM employee");
+            
+            rs = ste.executeQuery("SELECT id, fonction, Name, Last_name, Birth_Date, image, email FROM employee");
+       
             users = new ArrayList<>();
             while (rs.next()){
-                users.add(new Employee(rs.getInt(1),rs.getString(2)));
-                        //rs.getString(3),rs.getString(4),rs.getString(5),rs.getBoolean(6),rs.getString(7),rs.getString(8),rs.getString(9),rs.getShort(10),rs.getString(11),rs.getString(12),rs.getDate(13),rs.getString(14),rs.getDate(15),serializePHPtoJava(rs.getString(16)),rs.getString(17)));
+               
+       users.add(new Employee(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getDate(5),rs.getString(6),rs.getString(7)));
             }
         } catch (SQLException ex) {
             Logger.getLogger(EmployeeService.class.getName()).log(Level.SEVERE, null, ex);

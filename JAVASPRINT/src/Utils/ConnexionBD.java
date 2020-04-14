@@ -20,7 +20,7 @@ public class ConnexionBD{
 	private Connection con;
 	public String user = "khaoula";
 	public String password = "admin";
-	public String url = "jdbc:mysql://127.0.0.1:3306/symfony";
+	public String url = "jdbc:mysql://127.0.0.1:3306/symfony?useUnicode=true&amp;characterEncoding=utf8";
 	private ConnexionBD() {
 
 		try {
