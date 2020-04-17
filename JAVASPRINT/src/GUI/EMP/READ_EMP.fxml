@@ -4,18 +4,13 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="GUI.EMP.READ_EMPController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.EMP.READ_EMPController">
    <children>
       <TableView fx:id="table" layoutX="13.0" layoutY="58.0" prefHeight="307.0" prefWidth="574.0">
         <columns>
           <TableColumn fx:id="id" prefWidth="49.0" text="id" />
           <TableColumn fx:id="name" prefWidth="76.0" text="Name" />
             <TableColumn fx:id="lastname" prefWidth="100.0" text="Last Name" />
-            <TableColumn fx:id="fonction" prefWidth="75.0" text="fonction" />
-            <TableColumn fx:id="email" prefWidth="75.0" text="email" />
-            <TableColumn fx:id="image" prefWidth="75.0" text="image" />
-            <TableColumn fx:id="birth" prefWidth="75.0" text="birth" />
         </columns>
       </TableView>
    </children>

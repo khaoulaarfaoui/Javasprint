@@ -3,12 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/khaoula/NetBeansProjects/JAVASPRINT/src/Services/EmployeeService.java</file>
-            <file>file:/home/khaoula/NetBeansProjects/JAVASPRINT/src/Entities/Employee.java</file>
-            <file>file:/home/khaoula/NetBeansProjects/JAVASPRINT/src/GUI/EMP/CREATE_EMPController.java</file>
             <file>file:/home/khaoula/NetBeansProjects/JAVASPRINT/src/javasprint/JAVASPRINT.java</file>
-            <file>file:/home/khaoula/NetBeansProjects/JAVASPRINT/src/Utils/ConnexionBD.java</file>
+            <file>file:/home/khaoula/NetBeansProjects/JAVASPRINT/src/GUI/EMP/DELETE_EMPController.java</file>
+            <file>file:/home/khaoula/NetBeansProjects/JAVASPRINT/src/Entities/FosUser.java</file>
             <file>file:/home/khaoula/NetBeansProjects/JAVASPRINT/src/GUI/EMP/READ_EMPController.java</file>
+            <file>file:/home/khaoula/NetBeansProjects/JAVASPRINT/src/GUI/EMP/UPDATE_EMPController.java</file>
         </group>
     </open-files>
 </project-private>

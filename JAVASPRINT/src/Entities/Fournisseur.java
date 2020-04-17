@@ -16,16 +16,23 @@ public class Fournisseur {
  private String societe,secteur,Name, Last_name,image;
  private Date Entreprise_Date;
 
-    public Fournisseur(int id, int numsociete, String societe, String secteur, String Name, String Last_name, String image, Date Entreprise_Date) {
+    public Fournisseur(int id, String societe, int numsociete, String secteur, String Name, String Last_name, Date Entreprise_Date, String image) {
         this.id = id;
-        this.numsociete = numsociete;
         this.societe = societe;
+        this.numsociete = numsociete;
         this.secteur = secteur;
         this.Name = Name;
         this.Last_name = Last_name;
-        this.image = image;
         this.Entreprise_Date = Entreprise_Date;
+        this.image = image;
+        
     }
+
+    public Fournisseur(int id, String Name) {
+        this.id = id;
+        this.Name = Name;
+    }
+    
 
     public Fournisseur(int id, int numsociete) {
         this.id = id;

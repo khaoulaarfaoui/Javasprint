@@ -5,7 +5,7 @@
  */
 package javasprint;
 
-import Entities.Employee;
+import Services.JavaMailUtil;
 import Entities.FosUser;
 import Security.FOSJCrypt;
 import Services.FosUerService;
@@ -32,14 +32,17 @@ public class JAVASPRINT  extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("CREATE_EMP.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("READ_EMP.fxml"));
         Scene scene = new Scene(root);
  
         stage.setScene(scene);
         stage.show();
     }
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception { 
+        
+      //  JavaMailUtil.sendMail("alarfaouikhaoula@gmail.com");
+
             //throws NoSuchAlgorithmException, UnsupportedEncodingException {
        // boolean test =FOSJCrypt.checkPassword("123","$2y$12$f8lPIEQ5bKqWBXPqbfKyGebVsN9flIh4eC8CBMFTkuMGf WrB0C7ua");
         //System.out.println("test is "+ test);
@@ -62,6 +65,6 @@ public class JAVASPRINT  extends Application {
         System.out.println(f);        
        // Employee emp= new Employee(2,"aaa","bbb","ccc","aaa",date);
 */
-    }
     
-}
+    
+}}

@@ -48,7 +48,7 @@ public class FournisseurService {
         }
     }
          public void ajouter(Fournisseur user) {
-        String req = "INSERT INTO employee (societe, numsociete, secteur, Name ,Last_name ,EntrepriseDate, image) VALUES (?, ?, ?, ?, ?, ?, ? )" ;
+        String req = "INSERT INTO fournisseur (societe, numsociete, secteur, Name ,Last_name ,EntrepriseDate, image) VALUES (?, ?, ?, ?, ?, ?, ? )" ;
         PreparedStatement pre;
         
         try {
@@ -70,11 +70,12 @@ public class FournisseurService {
         ArrayList<Fournisseur> users = new ArrayList<>();
         ResultSet rs;
         try {
-            rs = ste.executeQuery("SELECT * FROM fournisseur");
-            users = new ArrayList<>();
+            rs = ste.executeQuery("SELECT id, societe, numsociete, secteur, Name, Last_name, EntrepriseDate, image FROM fournisseur");
+        //  rs = ste.executeQuery("SELECT id, Name FROM fournisseur");
+
+         users = new ArrayList<>();
             while (rs.next()){
-                users.add(new Fournisseur(rs.getInt(1),rs.getInt(2)));
-                        //rs.getString(3),rs.getString(4),rs.getString(5),rs.getBoolean(6),rs.getString(7),rs.getString(8),rs.getString(9),rs.getShort(10),rs.getString(11),rs.getString(12),rs.getDate(13),rs.getString(14),rs.getDate(15),serializePHPtoJava(rs.getString(16)),rs.getString(17)));
+            users.add(new Fournisseur(rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getString(4),rs.getString(5),rs.getString(6), rs.getDate(7), rs.getString(8)));
             }
         } catch (SQLException ex) {
             Logger.getLogger(FournisseurService.class.getName()).log(Level.SEVERE, null, ex);

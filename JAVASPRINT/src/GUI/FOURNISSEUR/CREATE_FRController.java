@@ -3,17 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI.EMP;
+package GUI.FOURNISSEUR;
 
-import Entities.Employee;
-import Services.EmployeeService;
+import Entities.Fournisseur;
+import Services.FournisseurService;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Date;
-
 import java.util.ResourceBundle;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
@@ -33,27 +30,29 @@ import javax.imageio.ImageIO;
  *
  * @author khaoula
  */
-public class CREATE_EMPController implements Initializable {
+public class CREATE_FRController implements Initializable {
 
-    @FXML
-    private ImageView img;
     @FXML
     private TextField name;
     @FXML
     private TextField lastname;
     @FXML
-    private TextField fonction;
+    private TextField numsociete;
     @FXML
-    private DatePicker birthdate;
+    private TextField secteur;
     @FXML
-    private Button submit;
-    @FXML
-    private Label wrong;
-    @FXML
-    private TextField email;
+    private DatePicker Date;
     @FXML
     private Button upload;
- File s;
+    @FXML
+    private Button ADD;
+    @FXML
+    private Label wrong;
+    File s;
+    @FXML
+    private ImageView img;
+    @FXML
+    private TextField societe;
     /**
      * Initializes the controller class.
      */
@@ -63,34 +62,29 @@ public class CREATE_EMPController implements Initializable {
     }    
 
     @FXML
-    private void fonction(ActionEvent event) {
-    }
-
-    @FXML
-    private void ADDEMP(ActionEvent event) throws FileNotFoundException {
-        EmployeeService EMPS= new  EmployeeService();
-        Employee EMP= new Employee();
+    private void add(ActionEvent event) {
+         FournisseurService FS= new  FournisseurService();
+        Fournisseur F= new Fournisseur();
         if (name.getText().trim().isEmpty()
-               
-            
+                || societe.getText().trim().isEmpty()
                 || lastname.getText().trim().isEmpty()
-                || fonction.getText().trim().isEmpty()               
-              
-                || email.getText().trim().isEmpty()
-             
-                ) {
-
+                || secteur.getText().trim().isEmpty()               
+                || numsociete.getText().trim().isEmpty()
+                ) 
             wrong.setVisible(true);
 
-        }
+       
           else {
-        EMP.setName(name.getText());
-        EMP.setLast_name(lastname.getText());
-        EMP.setFonction(fonction.getText());
-        EMP.setBirth_Date(java.sql.Date.valueOf(birthdate.getValue()));
-        EMP.setImage((String)(s.getName()));
-        EMP.setEmail(email.getText());
-            EMPS.ajouter(EMP);
+        F.setName(name.getText());
+        F.setLast_name(lastname.getText());
+        F.setSociete(societe.getText());
+        F.setNumsociete(Integer.parseInt(numsociete.getText()));
+        F.setSecteur(secteur.getText());
+
+        F.setEntreprise_Date(java.sql.Date.valueOf(Date.getValue()));
+        F.setImage((String)(s.getName()));
+        
+            FS.ajouter(F);
 
     }
     }

@@ -4,6 +4,7 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.EMP.UPDATE_EMPController">
@@ -15,14 +16,15 @@
       <Label layoutX="64.0" layoutY="225.0" text="Birthday" />
       <TextField fx:id="name" layoutX="203.0" layoutY="99.0" prefHeight="26.0" prefWidth="162.0" />
       <TextField fx:id="lastname" layoutX="193.0" layoutY="149.0" />
-      <TextField fx:id="img" layoutX="203.0" layoutY="271.0" />
       <TextField fx:id="email" layoutX="215.0" layoutY="332.0" />
       <Label layoutX="84.0" layoutY="42.0" text="ID" />
       <DatePicker fx:id="birthday" layoutX="202.0" layoutY="220.0" />
-      <TextField fx:id="idE" layoutX="193.0" layoutY="45.0" />
-      <Button fx:id="updateEMP" layoutX="444.0" layoutY="332.0" mnemonicParsing="false" onAction="#updateEMP" text="update" />
+      <Button fx:id="updateEMP" layoutX="444.0" layoutY="332.0" mnemonicParsing="false" onAction="#clicked" text="update" />
       <Label layoutX="66.0" layoutY="192.0" text="fonction" />
       <TextField fx:id="fonction" layoutX="203.0" layoutY="187.0" />
       <Label fx:id="wrong" layoutX="497.0" layoutY="184.0" text="Label" />
+      <Label fx:id="idE" layoutX="201.0" layoutY="24.0" prefHeight="34.0" prefWidth="127.0" />
+      <Button fx:id="img" layoutX="253.0" layoutY="276.0" mnemonicParsing="false" onAction="#upload" text="upload" />
+      <ImageView fx:id="img1" fitHeight="150.0" fitWidth="200.0" layoutX="376.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

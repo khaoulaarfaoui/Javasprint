@@ -53,7 +53,7 @@ public class EmployeeService {
     public void ajouter(Employee user) throws FileNotFoundException {
         String req = "INSERT INTO employee (fonction, Name, Last_name, Birth_Date, image, email) VALUES (?, ?, ?, ?, ?, ?)" ;
         PreparedStatement pre;
-           InputStream is = new FileInputStream(user.getEmail());
+           //InputStream is = new FileInputStream(user.getEmail());
            
         try {
             pre = connection.prepareStatement(req);
@@ -61,7 +61,7 @@ public class EmployeeService {
             pre.setString(2, user.getName());
             pre.setString(3, user.getLast_name());
             pre.setDate(4, user.getBirth_Date());
-            pre.setBlob(5, is);
+            pre.setString(5,user.getImage());
             pre.setString(6, user.getEmail());
             pre.executeUpdate();
             System.out.println("Employee ajouter avec succés");
@@ -100,7 +100,8 @@ public class EmployeeService {
         }
         return user;
     }  
-        public void editUser(Employee u, int id) throws SQLException {
+
+        public void editUser(Employee u) throws SQLException {
               try{
             String query = "update `employee` set fonction =?,Name = ? , Last_name =? , Birth_Date =? , image =?, email=?  where id =?  ;";
             PreparedStatement st = connection.prepareStatement(query);
@@ -110,7 +111,8 @@ public class EmployeeService {
             st.setDate(4, u.getBirth_Date());
             st.setString(5, u.getImage());
             st.setString(6, u.getEmail());
-            st.setInt(7, u.getId());
+           
+            st.setString(7,String.valueOf(u.getId()));
 
             st.execute();
             System.out.println("Changes saved successfully !");
